@@ -45,9 +45,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Car::class)]
     private Collection $cars;
 
+    #[ORM\OneToMany(mappedBy: 'driver', targetEntity: Ride::class)]
+    private Collection $rides;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Rule::class)]
+    private Collection $rules;
+
     public function __construct()
     {
         $this->cars = new ArrayCollection();
+        $this->rides = new ArrayCollection();
+        $this->rules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -192,6 +200,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($car->getOwner() === $this) {
                 $car->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ride>
+     */
+    public function getRides(): Collection
+    {
+        return $this->rides;
+    }
+
+    public function addRide(Ride $ride): self
+    {
+        if (!$this->rides->contains($ride)) {
+            $this->rides->add($ride);
+            $ride->setDriver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRide(Ride $ride): self
+    {
+        if ($this->rides->removeElement($ride)) {
+            // set the owning side to null (unless already changed)
+            if ($ride->getDriver() === $this) {
+                $ride->setDriver(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Rule>
+     */
+    public function getRules(): Collection
+    {
+        return $this->rules;
+    }
+
+    public function addRule(Rule $rule): self
+    {
+        if (!$this->rules->contains($rule)) {
+            $this->rules->add($rule);
+            $rule->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRule(Rule $rule): self
+    {
+        if ($this->rules->removeElement($rule)) {
+            // set the owning side to null (unless already changed)
+            if ($rule->getAuthor() === $this) {
+                $rule->setAuthor(null);
             }
         }
 
