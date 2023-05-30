@@ -16,8 +16,8 @@ class Ride
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $departure = null;
+    #[ORM\Column(length: 255)]
+    private ?string $departure = null;
 
     #[ORM\Column(length: 255)]
     private ?string $destination = null;
@@ -50,12 +50,12 @@ class Ride
         return $this->id;
     }
 
-    public function getDeparture(): ?\DateTimeInterface
+    public function getDeparture(): ?string
     {
         return $this->departure;
     }
 
-    public function setDeparture(\DateTimeInterface $departure): self
+    public function setDeparture(string $departure): self
     {
         $this->departure = $departure;
 
