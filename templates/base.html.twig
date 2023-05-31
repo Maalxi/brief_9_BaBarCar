@@ -12,7 +12,16 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
+        {% block javascripts_navbar %}
+            {{ encore_entry_script_tags('navbar') }}
+        {% endblock %}
     </head>
+    <header>
+    <div class="div_vide">
+    {% include "./navbar/navbar.html.twig" %}
+    </div>
+    </header>
     <body>
         {% block body %}{% endblock %}
     </body>

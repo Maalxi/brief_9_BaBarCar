@@ -1,0 +1,35 @@
+<nav>
+	<a href="/" class="nav-icon" aria-label="homepage" aria-current="page">
+		<img src="./img/Babarcar.png" alt="chat icon"/>
+		<span>BaBarCar</span>
+	</a>
+
+	<div class="main-navlinks">
+		<button type="button" class="hamburger" aria-label="Toggle Navigation" aria-expanded="false">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+		<div class="navlinks-container">
+			<a href="/" aria-current="page">Covoiturage</a>
+			<a href="/">bus</a>
+			<a href="/">Covoiturage du quotidien</a>
+		</div>
+	</div>
+
+	<div class="nav-authentication">
+		<a href="#" class="user-toggler" aria-label="Sign in page">
+			<img src="./img/user.svg" alt="user icon"/>
+		</a>
+		<div class="sign-btns">
+			{% if app.user %}
+					<button onclick="window.location.href = '/logout';" type="button">Rechercher</button>
+					<button onclick="window.location.href = '/logout';" type="button">Publier un trajet</button>
+					<button onclick="window.location.href = '/logout';" type="button">Se déconnecter</button>
+			{% else %}
+					<button onclick="window.location.href = '/login';" type="button">Rechercher</button>
+					<button onclick="window.location.href = '/login';" type="button">Connexion</button>
+			{% endif %}
+		</div>
+	</div>
+</nav>
