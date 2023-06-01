@@ -15,7 +15,7 @@ class TrajetController extends AbstractController
             'controller_name' => 'TrajetController',
         ]);
     }
-    #[Route('/trajet/publication', name: 'app_trajet')]
+    #[Route('/publication', name: 'app_publication')]
     public function publication(): Response
     {
         return $this->render('trajet/publication.html.twig', [

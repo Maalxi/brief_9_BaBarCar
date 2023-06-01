@@ -11,9 +11,9 @@
 			<span></span>
 		</button>
 		<div class="navlinks-container">
-			<a href="/" aria-current="page">Covoiturage</a>
-			<a href="/">bus</a>
-			<a href="/">Covoiturage du quotidien</a>
+			<a href="/covoiturage" aria-current="page">Covoiturage</a>
+			<a href="/bus">bus</a>
+			<a href="/covoiturage_quotidien">Covoiturage du quotidien</a>
 		</div>
 	</div>
 
@@ -24,7 +24,7 @@
 		<div class="sign-btns">
 			{% if app.user %}
 					<button onclick="window.location.href = '/recherche';" type="button">Rechercher</button>
-					<button onclick="window.location.href = '/trajet/publication';" type="button">Publier un trajet</button>
+					<button onclick="window.location.href = '/publication';" type="button">Publier un trajet</button>
 					<button onclick="window.location.href = '/logout';" type="button">Se déconnecter</button>
 			{% else %}
 					<button onclick="window.location.href = '/recherche';" type="button">Rechercher</button>
