@@ -1,5 +1,4 @@
 .container_homepage {
-  // width: 100vw;
   height: 70vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -7,6 +6,10 @@
   background-image: url("../../public/img/carpool_blablabus_large-e3d8eff32c13cdafc080..svg");
 }
 
-@media screen {
-  
+.container_homepage_promo {
+  height: 70vh;
+  // background-position: center;
+  background-repeat: no-repeat;
+  // background-size: cover;
+  background-image: url("../../public/img/esc_bbc-aad142670044d99e2f66..svg");
 }

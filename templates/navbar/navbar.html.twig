@@ -23,11 +23,11 @@
 		</a>
 		<div class="sign-btns">
 			{% if app.user %}
-					<button onclick="window.location.href = '/logout';" type="button">Rechercher</button>
-					<button onclick="window.location.href = '/logout';" type="button">Publier un trajet</button>
+					<button onclick="window.location.href = '/recherche';" type="button">Rechercher</button>
+					<button onclick="window.location.href = '/trajet/publication';" type="button">Publier un trajet</button>
 					<button onclick="window.location.href = '/logout';" type="button">Se déconnecter</button>
 			{% else %}
-					<button onclick="window.location.href = '/login';" type="button">Rechercher</button>
+					<button onclick="window.location.href = '/recherche';" type="button">Rechercher</button>
 					<button onclick="window.location.href = '/login';" type="button">Connexion</button>
 			{% endif %}
 		</div>
