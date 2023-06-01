@@ -1,7 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Publier un trajet{% endblock %}
+{% block title %}Publier un trajet
+{% endblock %}
 
 {% block body %}
-<h1>Publication du trajet</h1>
+	<div class="container">
+		<h1 class="text-center">Publication du trajet</h1>
+		{{ form_start(form) }}
+
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="form-group">
+					{{ form_label(form.departure, 'Départ') }}
+					{{ form_widget(form.departure, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_label(form.destination, 'Destination') }}
+					{{ form_widget(form.destination, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_label(form.seats, 'Nombre de places') }}
+					{{ form_widget(form.seats, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_label(form.price, 'Prix') }}
+					{{ form_widget(form.price, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+
+				<div class="form-group">
+					{{ form_label(form.date, 'Date') }}
+					{{ form_widget(form.date, { 'attr': {'class': 'form-control'} }) }}
+				</div>
+				<div class="text-center">
+					<button class="btn btn-primary" type="submit">Publier</button>
+				</div>
+			</div>
+		</div>
+
+		{{ form_end(form) }}
+	</div>
+
 {% endblock %}
