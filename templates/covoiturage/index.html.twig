@@ -1,39 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Covoiturage{% endblock %}
+{% block title %}Covoiturage
+{% endblock %}
 
 {% block body %}
 
-{% block content %}
-  <h1 class="text-center mt-2">Trajets disponibles</h1>
-  <div class="row">
-    {% for ride in rides %}
-      <div class="col-md-4">
-        <a href="{{ path('app_covoiturage', { 'id': ride.id }) }}" class="text-decoration-none">
-          <div class="card mb-4">
-            <div class="card-body">
-              {# <h5 class="card-title">Trajet {{ ride.id }}</h5> #}
-              <p class="card-text"><strong>Départ :</strong> {{ ride.departure }}</p>
-              <p class="card-text"><strong>Destination :</strong> {{ ride.destination }}</p>
-              <p class="card-text"><strong>Nombre de places :</strong> {{ ride.seats }}</p>
-              <p class="card-text"><strong>Prix :</strong> {{ ride.price }}</p>
-              <p class="card-text"><strong>Date :</strong> {{ ride.date|date('d/m/Y H:i') }}</p>
-              <p class="card-text"><strong>Conducteur :</strong> {{ ride.driver.firstName }}</p>
-              <h6 class="card-subtitle mb-2 text-muted">Règles :</h6>
-              <ul class="list-unstyled">
-                {% for rule in ride.rules %}
-                  <li>{{ rule.name }}</li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-        </a>
-      </div>
-      {% if loop.index % 3 == 0 %}
-        </div><div class="row">
-      {% endif %}
-    {% endfor %}
-  </div>
-{% endblock %}
+	{% block content %}
+		<h1 class="text-center mt-2">Trajets disponibles</h1>
+		<div class="row">
+			{% for ride in rides %}
+				<div class="col-md-4">
+					<a href="{{ path('app_details', {'id': ride.id}) }}" class="text-decoration-none">
+						<div class="card mb-4">
+							<div class="card-body">
+								<p class="card-text">
+									<strong>Départ :</strong>
+									{{ ride.departure }}</p>
+								<p class="card-text">
+									<strong>Destination :</strong>
+									{{ ride.destination }}</p>
+								<p class="card-text">
+									<strong>Nombre de places :</strong>
+									{{ ride.seats }}</p>
+								<p class="card-text">
+									<strong>Prix :</strong>
+									{{ ride.price }}</p>
+								<p class="card-text">
+									<strong>Date :</strong>
+									{{ ride.date|date('d/m/Y H:i') }}</p>
+								<p class="card-text">
+									<strong>Conducteur :</strong>
+									{{ ride.driver.firstName }}</p>
+								<h6 class="card-subtitle mb-2 text-muted">Règles :</h6>
+								<ul class="list-unstyled">
+									{% for rule in ride.rules %}
+										<li>{{ rule.name }}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+					</a>
+				</div>
+				{% if loop.index % 3 == 0 %}
+				</div>
+				<div class="row">
+				{% endif %}
+			{% endfor %}
+		</div>
+	{% endblock %}
 
 {% endblock %}

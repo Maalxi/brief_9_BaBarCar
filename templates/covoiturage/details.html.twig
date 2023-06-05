@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+	{% block content %}
+		<h1>Détails du trajet</h1>
+		<p>
+			<strong>Départ :</strong>
+			{{ rides.departure }}</p>
+		<p>
+			<strong>Destination :</strong>
+			{{ rides.destination }}</p>
+		<p>
+			<strong>Nombre de places :</strong>
+			{{ rides.seats }}</p>
+		<p>
+			<strong>Prix :</strong>
+			{{ rides.price }}</p>
+		<p>
+			<strong>Date :</strong>
+			{{ rides.date|date('d/m/Y H:i') }}</p>
+		<p>
+			<strong>Conducteur :</strong>
+			{{ rides.driver.firstName }}</p>
+		<h6>Règles :</h6>
+		<ul>
+			{% for rule in rides.rules %}
+				<li>{{ rule.name }}</li>
+			{% endfor %}
+		</ul>
+		<p>{{ rides.driver.id }}</p>
+	{% endblock %}
+{% endblock %}

@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Repository\RideRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Ride;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -32,6 +34,18 @@ class CovoiturageController extends AbstractController
     {
         return $this->render('covoiturage/bus.html.twig', [
             'controller_name' => 'CovoiturageController',
+        ]);
+    }
+    #[Route('/details', name: 'app_details')]
+    public function details(EntityManagerInterface $entityManager,Request $request): Response
+    {
+        $rideId = ($request->query->get("Id"));
+        $repository_ride = $entityManager->getRepository(Ride::class);
+        $rides = $repository_ride->findOneBy(['id' => $rideId]);
+
+        return $this->render('/covoiturage/details.html.twig', [
+            'controller_name' => 'CovoiturageController',
+            'rides' => $rides
         ]);
     }
 }
