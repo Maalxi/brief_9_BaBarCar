@@ -18,8 +18,8 @@ class RideFixtures extends AbstractFixture implements DependentFixtureInterface
             // Instancie un objet Product avec un nom
             $ride = new Ride();
       
-            $ride->setDeparture($this->faker->word());
-            $ride->setDestination($this->faker->word());
+            $ride->setDeparture($this->faker->city());
+            $ride->setDestination($this->faker->city());
             $ride->setSeats($this->faker->numberBetween(0,4));
             $ride->setPrice($this->faker->numberBetween(1,50));
             $ride->setDate($this->faker->dateTimeThisMonth());

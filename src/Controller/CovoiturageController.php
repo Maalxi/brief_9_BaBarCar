@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\RideRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,10 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class CovoiturageController extends AbstractController
 {
     #[Route('/covoiturage', name: 'app_covoiturage')]
-    public function index(): Response
+    public function index(RideRepository $rideRepository): Response
     {
+        $rides = $rideRepository->findAll();
+
         return $this->render('covoiturage/index.html.twig', [
             'controller_name' => 'CovoiturageController',
+            'rides' => $rides,
         ]);
     }
     #[Route('/covoiturage_quotidien', name: 'app_quotidien')]
