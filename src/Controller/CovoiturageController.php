@@ -37,11 +37,10 @@ class CovoiturageController extends AbstractController
         ]);
     }
     #[Route('/details', name: 'app_details')]
-    public function details(EntityManagerInterface $entityManager,Request $request): Response
+    public function details(RideRepository $rideRepository,Request $request): Response
     {
         $rideId = ($request->query->get("Id"));
-        $repository_ride = $entityManager->getRepository(Ride::class);
-        $rides = $repository_ride->findOneBy(['id' => $rideId]);
+        $rides = $rideRepository->findOneBy(['id' => $rideId]);
 
         return $this->render('/covoiturage/details.html.twig', [
             'controller_name' => 'CovoiturageController',

@@ -26,7 +26,7 @@ class UserFixtures extends AbstractFixture
           
           
           $phoneNumber = $this->faker->phoneNumber();
-          $adminUser->setPhone(intval($phoneNumber));
+          $adminUser->setPhone($phoneNumber);
 
           $manager->persist($adminUser);
   

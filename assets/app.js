@@ -9,6 +9,7 @@
 import './styles/app.scss';
 import './styles/navbar.scss';
 import './styles/homepage.scss';
+import './styles/details.scss';
 
 // start the Stimulus application
 import './bootstrap';

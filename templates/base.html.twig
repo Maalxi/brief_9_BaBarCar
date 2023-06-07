@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 		<title>
 			{% block title %}BaBarCar
 			{% endblock %}
@@ -20,9 +22,13 @@
 		{% endblock %}
 	</head>
 	{% block header %}
-		<div class="div_vide">
-			{% include "./navbar/navbar.html.twig" %}
-		</div>
+		{% if app.request.getRequestUri() not in ['/login'] %}
+			<div class="div_vide">
+				{% include "./navbar/navbar.html.twig" %}
+			</div>
+		{% else %}
+				{% include "./navbar/navbar.html.twig" %}
+		{% endif %}
 	{% endblock %}
 	<body>
 		{% block body %}{% endblock %}
