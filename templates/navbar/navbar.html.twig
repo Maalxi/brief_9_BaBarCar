@@ -18,30 +18,38 @@
 	</div>
 
 	<div class="nav-authentication">
-		<a href="#" class="user-toggler" aria-label="Sign in page">
-			<img src="./img/user.svg" alt="user icon"/>
-		</a>
-
-		<div class="dropdown">
-			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Dropdown
-			</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-				<button class="dropdown-item" type="button">Action</button>
-				<button class="dropdown-item" type="button">Another action</button>
-				<button class="dropdown-item" type="button">Something else here</button>
-			</div>
-		</div>
-
+		{% if app.user %}
+			<a href="/profil" class="user-toggler" aria-label="Sign in page">
+				<img src="./img/user.svg" alt="user icon"/>
+			</a>
+		{% else %}
+			<a href="/login" class="user-toggler" aria-label="Sign in page">
+				<img src="./img/user.svg" alt="user icon"/>
+			</a>
+		{% endif %}
 		<div class="sign-btns">
 			{% if app.user %}
 				<button onclick="window.location.href = '/recherche';" type="button">Rechercher</button>
 				<button onclick="window.location.href = '/publication';" type="button">Publier un trajet</button>
-				<button onclick="window.location.href = '/logout';" type="button">Se déconnecter</button>
+				<div class="user-toggle dropdown">
+					<button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="fas fa-user"></i>
+					</button>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" href="/profil">Profil</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/logout">Se déconnecter</a>
+						</li>
+					</ul>
+				</div>
+
 			{% else %}
 				<button onclick="window.location.href = '/recherche';" type="button">Rechercher</button>
 				<button onclick="window.location.href = '/login';" type="button">Connexion</button>
 			{% endif %}
+
 		</div>
 	</div>
 </nav>

@@ -9,27 +9,27 @@
 			</div>
 			<div class="card-body">
 				<p>
-					<strong>Départ :</strong>
+					<span class="custom-strong">Départ :</span>
 					{{ rides.departure }}
 				</p>
 				<p>
-					<strong>Destination :</strong>
+					<span class="custom-strong">Destination :</span>
 					{{ rides.destination }}
 				</p>
 				<p>
-					<strong>Nombre de places :</strong>
+					<span class="custom-strong">Nombre de places :</span>
 					{{ rides.seats }}
 				</p>
 				<p>
-					<strong>Prix :</strong>
+					<span class="custom-strong">Prix :</span>
 					{{ rides.price }}
 				</p>
 				<p>
-					<strong>Date :</strong>
+					<span class="custom-strong">Date :</span>
 					{{ rides.date|date('d/m/Y H:i') }}
 				</p>
 				<p>
-					<strong>Conducteur :</strong>
+					<span class="custom-strong">Conducteur :</span>
 					{{ rides.driver.firstName }}
 				</p>
 				<h6>Règles :</h6>

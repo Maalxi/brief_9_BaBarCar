@@ -17,23 +17,6 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * @IsTrue(message="Vous devez accepter nos conditions.")
-     */
-    private ?bool $agreeTerms = false;
-
-    public function getAgreeTerms(): ?bool
-    {
-        return $this->agreeTerms;
-    }
-
-    public function setAgreeTerms(bool $agreeTerms): self
-    {
-        $this->agreeTerms = $agreeTerms;
-
-        return $this;
-    }
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

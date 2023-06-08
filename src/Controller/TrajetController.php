@@ -19,9 +19,14 @@ class TrajetController extends AbstractController
             'controller_name' => 'TrajetController',
         ]);
     }
+
+    // Publier un nouveau trajet
+
     #[Route('/publication', name: 'app_publication')]
     public function publication(Request $request, EntityManagerInterface $entityManagerInterface): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $publication = new Ride();
 
         $form = $this->createForm(PublicationTrajetFormType::class, $publication);
@@ -29,10 +34,14 @@ class TrajetController extends AbstractController
         // Ecoute la soumission du formulaire
         $form->handleRequest($request);
 
+        $publication->setCreated(new \DateTime);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $publication->setDriver($this->getUser());
             $publication = $form->getData();
             $entityManagerInterface ->persist($publication);
             $entityManagerInterface->flush();
+            return $this->redirectToRoute('app_details', ['Id' => $publication->getId()]);
         }
 
         return $this->render('trajet/publication.html.twig', [
@@ -40,4 +49,8 @@ class TrajetController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    // Editer un trajet
+
+    
 }
