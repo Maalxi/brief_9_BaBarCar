@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="mt-5 text-center">Profil</h1>
+		<div class="row mt-4 justify-content-center">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="mb-0">Informations personnelles</h5>
+					</div>
+					<div class="card-body">
+						<dl class="row">
+							<span class="col-sm-3 text-dark">
+								<i class="fas fa-envelope"></i>
+								Email:
+							</span>
+							<dd class="col-sm-9">{{ user.email }}</dd>
+							<span class="col-sm-3 text-dark">
+								<i class="fas fa-user"></i>
+								Nom:
+							</span>
+							<dd class="col-sm-9">{{ user.lastName }}</dd>
+							<span class="col-sm-3 text-dark">
+								<i class="fas fa-user"></i>
+								Prénom:
+							</span>
+							<dd class="col-sm-9">{{ user.firstName }}</dd>
+							<span class="col-sm-3">
+								<i class="fas fa-phone"></i>
+								Téléphone:
+							</span>
+							<dd class="col-sm-9">{{ user.phone }}</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-4 justify-content-center">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="mb-0">Voitures</h5>
+					</div>
+					<div class="card-body">
+						{% if user.cars is not empty %}
+							<ul class="list-group">
+								{% for car in user.cars %}
+									<li class="list-group-item">{{ car.brand }}
+										{{ car.model }}
+										-
+										{{ car.seats }}</li>
+								{% endfor %}
+							</ul>
+						{% else %}
+							<p class="text-muted">Aucune voiture enregistrée.</p>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-4 justify-content-center">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="mb-0">Règles</h5>
+					</div>
+					<div class="card-body">
+						{% if user.rules is not empty %}
+							<ul class="list-group">
+								{% for rule in user.rules %}
+									<li class="list-group-item">{{ rule.name }}</li>
+									<li class="list-group-item">{{ rule.description }}</li>
+								{% endfor %}
+							</ul>
+						{% else %}
+							<p class="text-muted">Aucune règle définie.</p>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-4 justify-content-center">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="mb-0">Trajets</h5>
+					</div>
+					<div class="card-body">
+						{% if user.rides is not empty %}
+							<ul class="list-group">
+								{% for ride in user.rides %}
+									<li class="list-group-item">{{ ride.departure }}
+										-
+										{{ ride.destination }}
+										({{ ride.date.format('m-d') }})</li>
+								{% endfor %}
+							</ul>
+						{% else %}
+							<p class="text-muted">Aucun trajet enregistré.</p>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
