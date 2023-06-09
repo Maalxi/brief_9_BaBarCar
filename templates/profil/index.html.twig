@@ -1,124 +1,224 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil
+{% block title %}
+	Dashboard |
+	{{app.user.firstName}}
+	{{app.user.lastName}}
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<h1 class="mt-5 text-center">Profil</h1>
 
-		{% if app.user %}
-			<div class="flex">
-				<p>
-					Vous êtes connecté en tant que :
-					{{ user.email }},
-				</p>
-				<a href="/logout" class="" aria-label="Sign in page">
-					<p>Se déconnecter</p>
-				</a>
+	<div
+		class="mt-4 d-flex row justify-content-center">
+		<!-- User Info Card -->
+		<div class="col-10">
+			<div class="card shadow">
+				<div class="card-header text-black">
+					<h5 class="card-title mb-0">
+						<i class="fas fa-user-circle"></i>
+						Mes Informations Personnelles
+					</h5>
+				</div>
+				<div class="card-body d-flex justify-content-center flex-column">
+					<p class="card-text mb-2">
+						<h5 class="card-title mb-0">
+							<i class="fas fa-user-circle"></i>
+							{{app.user.firstName}}
+							{{app.user.lastName}}
+						</h5>
+					</p>
+					<p class="card-text mb-2">
+						<i class="fas fa-envelope"></i>
+						<span class="custom-strong">Email:
+						</span>
+						{{app.user.email}}
+					</p>
+					<p class="card-text">
+						<i class="fas fa-phone"></i>
+						<span class="custom-strong">Téléphone :
+						</span>
+						{{app.user.phone}}
+					</p>
+					<div class="text-center">
+						<a href="/edit_profil" class="btn btn-primary mt-3">
+							<i class="fas fa-edit"></i>
+							Editer votre profil
+						</a>
+					</div>
+				</div>
 			</div>
-			{% else %}
-		{% endif %}
+		</div>
 
-		<div class="row mt-4 justify-content-center">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<h5 class="mb-0">Informations personnelles</h5>
-					</div>
-					<div class="card-body">
-						<dl class="row">
-							<span class="col-sm-3 text-dark">
-								<i class="fas fa-envelope"></i>
-								Email:
-							</span>
-							<dd class="col-sm-9">{{ user.email }}</dd>
-							<span class="col-sm-3 text-dark">
-								<i class="fas fa-user"></i>
-								Nom:
-							</span>
-							<dd class="col-sm-9">{{ user.lastName }}</dd>
-							<span class="col-sm-3 text-dark">
-								<i class="fas fa-user"></i>
-								Prénom:
-							</span>
-							<dd class="col-sm-9">{{ user.firstName }}</dd>
-							<span class="col-sm-3">
-								<i class="fas fa-phone"></i>
-								Téléphone:
-							</span>
-							<dd class="col-sm-9">{{ user.phone }}</dd>
-						</dl>
+
+		<!-- Cars Card -->
+		<div class="col-10 mt-4">
+			<div class="card shadow">
+				<div class="card-header text-black">
+					<h5 class="card-title mb-0">
+						<i class="fas fa-car"></i>
+						Mes Véhicules
+					</h5>
+				</div>
+				<div class="card-body d-flex justify-content-center flex-column">
+					{% for car in app.user.cars %}
+						<div class="col-12 border rounded my-2 p-2">
+							<div class="d-flex justify-content-between align-items-start">
+								<div>
+									<i class="fas fa-car fa-2x mb-2"></i>
+									<!-- Nouvelle icône de voiture -->
+									<p class="card-text">
+										<span class="custom-strong">Marque :
+										</span>
+										{{car.brand}}<br>
+										<span class="custom-strong">Modèle :
+										</span>
+										{{car.model}}<br>
+										<span class="custom-strong">Nombre de places :
+										</span>
+										{{car.seats}}<br>
+									</p>
+								</div>
+								<div class="car-actions">
+									<a href="" class="btn btn-primary btn-sm">
+										<i class="fas fa-edit"></i>
+										Modifier
+									</a>
+									<a href="" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce véhicule ?')">
+										<i class="fas fa-trash"></i>
+										Supprimer
+									</a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+					<div class="text-center">
+						<a href="/ajout_vehicule" class="btn btn-primary mt-3">
+							<i class="fas fa-plus"></i>
+							Ajouter un véhicule
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4 justify-content-center">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<h5 class="mb-0">Voitures</h5>
-					</div>
-					<div class="card-body">
-						{% if user.cars is not empty %}
-							<ul class="list-group">
-								{% for car in user.cars %}
-									<li class="list-group-item">{{ car.brand }}
-										{{ car.model }}
+
+		<div class="col-10 mt-4">
+			<div class="card shadow mb-4">
+				<div class="card-header text-black">
+					<h5 class="card-title">
+						<i class="fas fa-list"></i>
+						Mes Règles
+					</h5>
+				</div>
+				<div class="card-body d-flex justify-content-center flex-column">
+					<ul class="list-unstyled">
+						{% for rule in app.user.rules %}
+							<li class="rule-item border rounded my-2 p-2">
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="rule-details">
+										<span class="custom-strong">{{ rule.name }}</span>
 										-
-										{{ car.seats }}</li>
-								{% endfor %}
-							</ul>
+										{{ rule.description }}
+									</div>
+									<div class="rule-actions">
+										<a href="" class="btn btn-primary btn-sm">
+											<i class="fas fa-edit"></i>
+											Modifier
+										</a>
+										<a href="" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette règle ?')">
+											<i class="fas fa-trash"></i>
+											Supprimer
+										</a>
+									</div>
+								</div>
+							</li>
 						{% else %}
-							<p class="text-muted">Aucune voiture enregistrée.</p>
-						{% endif %}
+							<p>Vous n'avez pas encore de règles définies.</p>
+						{% endfor %}
+					</ul>
+					<div class="text-center">
+						<a href="/ajout_regle" class="btn btn-primary mt-3">
+							<i class="fas fa-plus"></i>
+							Ajouter une règle
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4 justify-content-center">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<h5 class="mb-0">Règles</h5>
-					</div>
-					<div class="card-body">
-						{% if user.rules is not empty %}
-							<ul class="list-group">
-								{% for rule in user.rules %}
-									<li class="list-group-item">{{ rule.name }}</li>
-									<li class="list-group-item">{{ rule.description }}</li>
-								{% endfor %}
-							</ul>
-						{% else %}
-							<p class="text-muted">Aucune règle définie.</p>
-						{% endif %}
-					</div>
+
+		<div class="col-10">
+			<div class="card shadow mb-4">
+				<div class="card-header text-black">
+					<h5 class="card-title mb-0">
+						<i class="fas fa-route"></i>
+						Mes Trajets
+					</h5>
 				</div>
-			</div>
-		</div>
-		<div class="row mt-4 justify-content-center">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<h5 class="mb-0">Trajets</h5>
-					</div>
-					<div class="card-body">
-						{% if user.rides is not empty %}
-							<ul class="list-group">
-								{% for ride in user.rides %}
-									<li class="list-group-item">{{ ride.departure }}
-										-
+				<div class="card-body">
+					<div class="cardContainer">
+						{% for ride in app.user.rides %}
+							<div class="card card4 shadow-sm m-2">
+								<div class="card-header">
+									<h5 class="card-title">
+										<i class="fas fa-road"></i>
+										De
+										{{ ride.departure }}
+										à
 										{{ ride.destination }}
-										({{ ride.date.format('m-d') }})</li>
-								{% endfor %}
-							</ul>
+									</h5>
+								</div>
+								<div class="card-body d-flex justify-content-center flex-column">
+									<p class="card-text">
+										<i class="fas fa-user"></i>
+										<span class="custom-strong">
+											Conducteur :</span>
+										{{ ride.driver.firstName }}
+										{{ ride.driver.lastName | first | upper }}.
+									</p>
+									<p class="card-text">
+										<i class="fas fa-clock"></i>
+										<span class="custom-strong">
+											Date de départ :</span>
+										{{ ride.date | date('d/m/Y H:i') }}
+									</p>
+									<p class="card-text">
+										<i class="fas fa-chair"></i>
+										<span class="custom-strong">
+											Nombre de places disponibles :</span>
+										{{ ride.seats }}
+									</p>
+									<p class="card-text">
+										<i class="fas fa-euro-sign"></i>
+										<span class="custom-strong">
+											Prix :</span>
+										{{ ride.price }}€
+									</p>
+									<p class="card-text">
+										<i class="fas fa-list"></i>
+										<span class="custom-strong">
+											Règles :</span>
+										<ul>
+											{% for rule in ride.rules %}
+												<li>{{ rule.name }}
+													:
+													{{ rule.description }}</li>
+											{% endfor %}
+										</ul>
+									</p>
+								</div>
+								<div class="card-footer text-muted text-center">
+									<a href="" class="btn btn-primary">
+										<i class="fas fa-eye"></i>
+										Voir les détails</a>
+								</div>
+							</div>
 						{% else %}
-							<p class="text-muted">Aucun trajet enregistré.</p>
-						{% endif %}
+							<p class="text-center">Vous ne proposez aucun covoiturage actuellement.
+								<a href="" class="text-primary">Ajouter un trajet ?</a>
+							</p>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-{% endblock %}
+</div></div>{% endblock %}

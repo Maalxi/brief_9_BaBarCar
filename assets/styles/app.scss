@@ -7,6 +7,10 @@
   font-family: "Helvetica Neue", sans-serif;
 }
 
+.row {
+  --bs-gutter-x: 0;
+}
+
 nav {
   z-index: 10;
 }

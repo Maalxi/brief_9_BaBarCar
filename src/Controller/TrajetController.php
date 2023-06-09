@@ -12,14 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TrajetController extends AbstractController
 {
-    #[Route('/trajet', name: 'app_trajet')]
-    public function index(): Response
-    {
-        return $this->render('trajet/index.html.twig', [
-            'controller_name' => 'TrajetController',
-        ]);
-    }
-
     // Publier un nouveau trajet
 
     #[Route('/publication', name: 'app_publication')]
