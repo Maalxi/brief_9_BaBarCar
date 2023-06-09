@@ -9,15 +9,15 @@
 				<div class="card-body p-5">
 					<h1 class="mb-4 text-center text-primary">
 						<i class="fas fa-car"></i>
-						Ajouter un véhicule
+						Modifier votre véhicule
 					</h1>
-					{{ form_start(addCarForm, {'attr': {'class': 'g-3'}}) }}
+					{{ form_start(editCarForm, {'attr': {'class': 'g-3'}}) }}
 					<div class="md-6">
 						<div class="input-group mb-3">
 							<span class="input-group-text bg-primary text-white">
 								<i class="fas fa-car"></i>
 							</span>
-							{{ form_widget(addCarForm.brand, {'attr': {'class': 'form-control', 'placeholder': 'Marque'}}) }}
+							{{ form_widget(editCarForm.brand, {'attr': {'class': 'form-control', 'placeholder': 'Marque'}}) }}
 						</div>
 					</div>
 					<div class="md-6">
@@ -25,7 +25,7 @@
 							<span class="input-group-text bg-primary text-white">
 								<i class="fas fa-car"></i>
 							</span>
-							{{ form_widget(addCarForm.model, {'attr': {'class': 'form-control', 'placeholder': 'Modèle'}}) }}
+							{{ form_widget(editCarForm.model, {'attr': {'class': 'form-control', 'placeholder': 'Modèle'}}) }}
 						</div>
 					</div>
 					<div class="md-6">
@@ -33,7 +33,7 @@
 							<span class="input-group-text bg-primary text-white">
 								<i class="fas fa-user-friends"></i>
 							</span>
-							{{ form_widget(addCarForm.seats, {'attr': {'class': 'form-control', 'placeholder': 'Nombre de places'}}) }}
+							{{ form_widget(editCarForm.seats, {'attr': {'class': 'form-control', 'placeholder': 'Nombre de places'}}) }}
 						</div>
 					</div>
 					<div class="col-12 d-flex justify-content-center">
@@ -43,10 +43,9 @@
 						</button>
 					</div>
 					<div id="rule-list"></div>
-					{{ form_end(addCarForm) }}
+					{{ form_end(editCarForm) }}
 				</div>
 			</div>
 		</div>
 	</div>
-
 {% endblock %}

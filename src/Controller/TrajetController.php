@@ -12,8 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TrajetController extends AbstractController
 {
-    // Publier un nouveau trajet
-
     #[Route('/publication', name: 'app_publication')]
     public function publication(Request $request, EntityManagerInterface $entityManagerInterface): Response
     {
@@ -41,8 +39,4 @@ class TrajetController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    // Editer un trajet
-
-    
 }
