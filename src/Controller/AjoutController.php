@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Rule;
 use App\Form\AddCarType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -90,11 +91,29 @@ class AjoutController extends AbstractController
         ]);
     }
 
-    #[Route('/ajout_regle', name: 'app_ajout_regle')]
-    public function ajout_regle(): Response
+    #[Route('/addrule', name: 'app_add_rule')]
+    public function addRule(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $rule = new Rule();
+        $pageTitle = 'Ajouter une règle';
+        $addRuleForm = $this->createForm(RuleType::class, $rule);
+        $addRuleForm->handleRequest($request);
+
+        if ($addRuleForm->isSubmitted() && $addRuleForm->isValid()) {
+            $rule->setAuthor($this->getUser());
+
+            $entityManager->persist($rule);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_profil', ['id' => $rule->getId()]);
+        }
+
         return $this->render('ajout/regle.html.twig', [
             'controller_name' => 'AjoutController',
+            'page_title' => $pageTitle,
+            'addRuleForm' => $addRuleForm
         ]);
     }
 }
